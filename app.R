@@ -17,7 +17,7 @@ library('ggvis')
 
 ######## Read in arguments ##########
 optionList <- list(
-    make_option(c("-f", "--file"), type="character", help="Variant-major additive component file from PLINK"))
+    make_option(c("-f", "--file"), type="character", help="PheWAS file"))
 
 parser <- OptionParser(
     usage="%prog -f <file>",
@@ -53,15 +53,14 @@ server <- function(input, output) {
     library('tidyverse')
     library('DT')
     library('ggvis')
-    df<-fread('ukbb_phecodes_cleaned.csv')
-    #df<-fread('all_phecodes_ukbb_phenodefs.txt.gz')
-    #names(df)<-names(df)%>%make.unique()
-    #names(df)[1]<-'Chr'
->>>>>>> 6628235e6fe530add3978ceea8cfbad78ebb7ce8
-    ##Change this: select columns you care about for analysis
-    #df<-df%>%select(Chr,POS,ID,REF,ALT,af,num_cases,num_controls,pval,phecode,group,description)%>%
-    #    mutate(p=-log(pval,base=10),
-    #           rowid=seq(n()))
+    #df<-fread('ukbb_phecodes_cleaned.csv')
+    df<-fread('all_phecodes_ukbb_phenodefs.txt.gz')
+    names(df)<-names(df)%>%make.unique()
+    names(df)[1]<-'Chr'
+    #Change this: select columns you care about for analysis
+    df<-df%>%select(Chr,POS,ID,REF,ALT,af,num_cases,num_controls,pval,phecode,group,description)%>%
+        mutate(p=-log(pval,base=10),
+               rowid=seq(n()))
     
     
     output$mytable1 <- DT::renderDataTable(
