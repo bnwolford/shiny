@@ -45,7 +45,7 @@ ui <- fluidPage(
 ### Define server logic required to draw a histogram
 server <- function(input, output) {
     ##df<-fread(arguments$options$file)
-    df<-fread("/net/hunt/disk2/bwolford/Chen_lab_collab/for_Oren/all_phecodes_ukbb_phenodefs.txt")
+    df<-fread("file.txt")
     names(df)<-names(df)%>%make.unique()
     names(df)[1]<-'Chr'
     #Change this: select columns you care about for analysis
