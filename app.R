@@ -44,17 +44,7 @@ ui <- fluidPage(
 
 ### Define server logic required to draw a histogram
 server <- function(input, output) {
-<<<<<<< HEAD
     df<-fread(arguments$options$file)
-    names(df)<-names(df)%>%make.unique()
-    names(df)[1]<-'Chr' #change first column name from #CHROM to Chr
-=======
-    library('data.table')
-    library('tidyverse')
-    library('DT')
-    library('ggvis')
-    #df<-fread('ukbb_phecodes_cleaned.csv')
-    df<-fread('all_phecodes_ukbb_phenodefs.txt.gz')
     names(df)<-names(df)%>%make.unique()
     names(df)[1]<-'Chr'
     #Change this: select columns you care about for analysis
