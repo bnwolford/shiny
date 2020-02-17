@@ -1,5 +1,26 @@
+#!/usr/bin/Rscript
+
+##===============================================================================
+## Copyright (C) 2020 Will Zehr Overton and Brooke Wolford
+## Lab of Dr. Cristen Willer and Dr. Mike Boehnke
+##=============================================================================
+
+
 library(shiny)
 library(ggvis)
+library(optparse)
+
+######## Read in arguments ##########
+optionList <- list(
+    make_option(c("-f", "--file"), type="character", help="Variant-major additive component file from PLINK"))
+
+parser <- OptionParser(
+    usage="%prog -f <file>,"
+    option_list=optionList
+        )
+
+optStrings <- getOptionStrings(parser)
+arguments <- parse_args(parser, positional_arguments=TRUE)
 
 ui <- fluidPage(
     
@@ -14,8 +35,6 @@ ui <- fluidPage(
             column(3, verbatimTextOutput('x4'))
         )
     )
-
-
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
