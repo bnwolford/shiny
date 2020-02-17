@@ -5,23 +5,29 @@
 ## Lab of Dr. Cristen Willer and Dr. Mike Boehnke
 ##=============================================================================
 
-
+######## Load packages ##########
 library(shiny)
 library(ggvis)
 library(optparse)
+
+library('data.table')
+library('tidyverse')
+library('DT')
+library('ggvis')
 
 ######## Read in arguments ##########
 optionList <- list(
     make_option(c("-f", "--file"), type="character", help="Variant-major additive component file from PLINK"))
 
 parser <- OptionParser(
-    usage="%prog -f <file>,"
+    usage="%prog -f <file>",
     option_list=optionList
         )
 
-optStrings <- getOptionStrings(parser)
 arguments <- parse_args(parser, positional_arguments=TRUE)
 
+
+### Define UI logic
 ui <- fluidPage(
     
     titlePanel("Phecodes in UKBB"),
@@ -36,16 +42,11 @@ ui <- fluidPage(
         )
     )
 
-# Define server logic required to draw a histogram
+### Define server logic required to draw a histogram
 server <- function(input, output) {
-    library('data.table')
-    library('tidyverse')
-    library('DT')
-    library('ggvis')
-    
-    df<-fread('all_phecodes_ukbb_phenodefs.txt.gz')
+    df<-fread(arguments$options$file)
     names(df)<-names(df)%>%make.unique()
-    names(df)[1]<-'Chr'
+    names(df)[1]<-'Chr' #change first column name from #CHROM to Chr
     ##Change this: select columns you care about for analysis
     df<-df%>%select(Chr,POS,ID,REF,ALT,af,num_cases,num_controls,pval,phecode,group)%>%
         mutate(p=-log(pval,base=10),
@@ -112,5 +113,5 @@ server <- function(input, output) {
 }
 
 
-# Run the application 
+## Run the application 
 shinyApp(ui = ui, server = server)
