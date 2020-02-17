@@ -23,18 +23,18 @@ server <- function(input, output) {
     library('tidyverse')
     library('DT')
     library('ggvis')
-    
-    df<-fread('all_phecodes_ukbb_phenodefs.txt.gz')
-    names(df)<-names(df)%>%make.unique()
-    names(df)[1]<-'Chr'
+    df<-fread('ukbb_phecodes_cleaned.csv')
+    #df<-fread('all_phecodes_ukbb_phenodefs.txt.gz')
+    #names(df)<-names(df)%>%make.unique()
+    #names(df)[1]<-'Chr'
     ##Change this: select columns you care about for analysis
-    df<-df%>%select(Chr,POS,ID,REF,ALT,af,num_cases,num_controls,pval,phecode,group)%>%
-        mutate(p=-log(pval,base=10),
-               rowid=seq(n()))
+    #df<-df%>%select(Chr,POS,ID,REF,ALT,af,num_cases,num_controls,pval,phecode,group,description)%>%
+    #    mutate(p=-log(pval,base=10),
+    #           rowid=seq(n()))
     
     
     output$mytable1 <- DT::renderDataTable(
-        DT::datatable({df%>%select(Chr,POS,ID,REF,ALT,af,num_cases,num_controls)%>%unique}, selection = 'single',
+        DT::datatable({df%>%select(Chr,POS,ID,REF,ALT,af,num_cases,num_controls,description,pval)%>%unique}, selection = 'single',
                       rownames=FALSE,
                       options = list(
                           pageLength=10,
@@ -64,7 +64,8 @@ server <- function(input, output) {
                #print some stuff from genedf
                'p value: ', formatC(signif(genedf$pval,digits=3)),"</b><br>",
                'phecode: ', formatC(signif(genedf$phecode,digits=3)),"</b><br>",
-               'group: ', genedf$group,"</b><br>"
+               "<b>",'group: ', genedf$group,"</b><br>",
+               'description: ', genedf$description
         )
     }
     
