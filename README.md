@@ -1,5 +1,5 @@
 
-To clone repo:
+To clone repo:  
 `git clone https://github.com/bnwolford/shiny.git`
 
 ## app.R
