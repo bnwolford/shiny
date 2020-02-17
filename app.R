@@ -113,10 +113,5 @@ server <- function(input, output) {
     
 }
 
-
-<<<<<<< HEAD
-## Run the application 
-=======
 # Run the application 
->>>>>>> 6628235e6fe530add3978ceea8cfbad78ebb7ce8
 shinyApp(ui = ui, server = server)
