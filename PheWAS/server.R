@@ -1,7 +1,15 @@
+library(shiny)
+library(ggvis)
+library(optparse)
+library('data.table')
+library('tidyverse')
+library('DT')
+library('ggvis')
+
 ### Define server logic required to draw a histogram
 server <- function(input, output) {
     ##df<-fread(arguments$options$file)
-    df<-fread("file.txt")
+    df<-fread("zcat file.txt.gz")
     names(df)<-names(df)%>%make.unique()
     names(df)[1]<-'Chr'
     #Change this: select columns you care about for analysis
@@ -70,3 +78,4 @@ server <- function(input, output) {
     
 }
 
+shinyServer(server)
