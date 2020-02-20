@@ -1,10 +1,10 @@
 library(shiny)
 library(ggvis)
 library(optparse)
-library('data.table')
-library('tidyverse')
-library('DT')
-library('ggvis')
+library(data.table)
+library(tidyverse)
+library(DT)
+library(ggvis)
 
 ### Define UI logic
 ui <- fluidPage(
@@ -22,4 +22,4 @@ ui <- fluidPage(
     )
 
 
-shinyUI(ui)
+#shinyUI(ui)

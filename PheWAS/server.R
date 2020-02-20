@@ -1,15 +1,15 @@
 library(shiny)
 library(ggvis)
 library(optparse)
-library('data.table')
-library('tidyverse')
-library('DT')
-library('ggvis')
+library(data.table)
+library(tidyverse)
+library(DT)
+library(ggvis)
 
 ### Define server logic required to draw a histogram
 server <- function(input, output,session) {
     ##df<-fread(arguments$options$file)
-    df<-read.csv(ukbb_phecodes_cleaned.csv)
+    df<-read.csv("ukbb_phecodes_cleaned.csv",stringsAsFactors = FALSE,encoding='UTF-8')
         
     output$mytable1 <- DT::renderDataTable(
         DT::datatable({df%>%select(Chr,POS,ID,REF,ALT,af,num_cases,num_controls,description,pval)%>%unique}, selection = 'single',
@@ -71,4 +71,4 @@ server <- function(input, output,session) {
     
 }
 
-shinyServer(server)
+#shinyServer(server)
