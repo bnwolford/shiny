@@ -7,17 +7,10 @@ library('DT')
 library('ggvis')
 
 ### Define server logic required to draw a histogram
-server <- function(input, output) {
+server <- function(input, output,session) {
     ##df<-fread(arguments$options$file)
-    df<-fread("zcat file.txt.gz")
-    names(df)<-names(df)%>%make.unique()
-    names(df)[1]<-'Chr'
-    #Change this: select columns you care about for analysis
-    df<-df%>%select(Chr,POS,ID,REF,ALT,af,num_cases,num_controls,pval,phecode,group,description)%>%
-        mutate(p=-log(pval,base=10),
-               rowid=seq(n()))
-    
-    
+    df<-read.csv(ukbb_phecodes_cleaned.csv)
+        
     output$mytable1 <- DT::renderDataTable(
         DT::datatable({df%>%select(Chr,POS,ID,REF,ALT,af,num_cases,num_controls,description,pval)%>%unique}, selection = 'single',
                       rownames=FALSE,
