@@ -6,6 +6,11 @@ To clone repo:
 Shiny app made by Will Zehr Overton for displaying PheWAS results for a genic region.
 
 ## PheWAS
-Testing deployment
+Testing deployment 
+- on SPH server  
+http://shiny.sph.umich.edu/bwolford/shiny/PheWAS/
+- on personal rshiny  
+https://bnwolford.shinyapps.io/phewas/
 
-https://www.shinyapps.io
+
+
