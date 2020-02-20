@@ -7,7 +7,7 @@ library(DT)
 library(ggvis)
 
 ### Define server logic required to draw a histogram
-server <- function(input, output,session) {
+function(input, output,session) {
     ##df<-fread(arguments$options$file)
     df<-read.csv("ukbb_phecodes_cleaned.csv",stringsAsFactors = FALSE,encoding='UTF-8')
         
