@@ -1,16 +1,15 @@
-library(shiny)
-library(ggvis)
-library(optparse)
-library(data.table)
-library(tidyverse)
-library(DT)
-library(ggvis)
 
 ### Define UI logic
 fluidPage(
 
-    titlePanel("Phecodes in UKBB"),
+    titlePanel("PheWAS in HRC imputed UKBB"),
     tableOutput("data"),
+    
+    sidebarPanel(
+      selectizeInput('gene', 'Select gene', choices = c("choose" = "", c("GLYAT","PM20D1"))),
+      actionButton(inputId = "go",label = "Build!")
+    ),
+  
     
     mainPanel(
         ggvisOutput("plot2"),
